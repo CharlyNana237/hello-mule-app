@@ -18,7 +18,7 @@
 	</properties>
 	<profiles>
 		<profile>
-			<id>DEV</id>
+			<id>dev</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -47,7 +47,7 @@
 		</profile>
 
 		<profile>
-			<id>TEST</id>
+			<id>test</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -117,6 +117,12 @@
 			<groupId>org.mule.connectors</groupId>
 			<artifactId>mule-sockets-connector</artifactId>
 			<version>1.2.2</version>
+			<classifier>mule-plugin</classifier>
+		</dependency>
+		<dependency>
+			<groupId>com.mulesoft.modules</groupId>
+			<artifactId>mule-secure-configuration-property-module</artifactId>
+			<version>1.2.7</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
 	</dependencies>

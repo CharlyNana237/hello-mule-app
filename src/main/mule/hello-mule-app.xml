@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
-	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
-http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+<mule xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
 	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="ffb28e81-8694-42d1-b488-89080e4a3c2c" basePath="/test">
-		<http:listener-connection host="0.0.0.0" port="8081" />
+		<http:listener-connection host="localhost" port="${secure::http.port}" />
 	</http:listener-config>
+	<secure-properties:config name="Secure_Properties_Config" doc:name="Secure Properties Config" doc:id="d8795e52-efa5-4cc3-a0d5-f210fbe96f5c" file="${env}.yaml" key="${enc.key}.yaml" >
+		<secure-properties:encrypt algorithm="Blowfish" />
+	</secure-properties:config>
 	<flow name="hello-mule-appFlow1" doc:id="a8f5cbe1-e8dc-4710-a3d4-dde7a3a48331" >
 		<http:listener doc:name="Listener" doc:id="e81b61bc-796a-4398-98b6-c88ca981d1ea" config-ref="HTTP_Listener_config" path="/test"/>
 		<logger level="INFO" doc:name="Logger" doc:id="e9d12b83-6434-47d5-9a11-607e15da5e59" message="STATED FLOW"/>
